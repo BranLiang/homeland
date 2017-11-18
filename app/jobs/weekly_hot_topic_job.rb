@@ -5,7 +5,7 @@ class WeeklyHotTopicJob
   def perform
     clear_inactive_topics_score
     active_topics.each do |topic|
-      topic.update_column(weekly_score: ScoreCalculator.new(topic, ranges).calculate)
+      topic.update_column(:weekly_score, ScoreCalculator.new(topic, ranges).calculate)
     end
   end
 
