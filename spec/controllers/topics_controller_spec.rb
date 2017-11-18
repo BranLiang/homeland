@@ -27,6 +27,27 @@ describe TopicsController, type: :controller do
     end
   end
 
+  describe 'hot_topics' do
+    before(:each) do
+      create(:reply, topic: topic)
+      create(:topic_view, topic: topic)
+    end
+
+    context '#weekly' do
+      it 'should be_success' do
+        get :weekly_hot
+        expect(response).to be_success
+      end
+    end
+
+    context '#daily_hot' do
+      it 'should be_success' do
+        get :daily_hot
+        expect(response).to be_success
+      end
+    end
+  end
+
   describe ':feed' do
     it 'should have a feed action' do
       get :feed
