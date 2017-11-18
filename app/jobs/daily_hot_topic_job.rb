@@ -14,7 +14,7 @@ class DailyHotTopicJob
   def active_topics
     @topics = Topic
       .left_outer_joins(:topic_views)
-      .where("topics.replied_at >= ? OR topic_views.created_at >= ?", Time.now - 1.day, Time.now - 1.day)
+      .where("topics.replied_at >= ? OR topic_views.created_at >= ?", day_ago, day_ago)
       .distinct
   end
 
@@ -23,6 +23,10 @@ class DailyHotTopicJob
   end
 
   def ranges
-    @ranges ||= daily_ranges
+    @ranges ||= daily_ranges(day_ago)
+  end
+
+  def day_ago
+    @day_ago ||= Time.now - 1.day
   end
 end

@@ -14,7 +14,7 @@ class WeeklyHotTopicJob
   def active_topics
     @topics = Topic
       .left_outer_joins(:topic_views)
-      .where("topics.replied_at >= ? OR topic_views.created_at >= ?", Time.now - 1.week, Time.now - 1.week)
+      .where("topics.replied_at >= ? OR topic_views.created_at >= ?", week_age, week_age)
       .distinct
   end
 
@@ -23,6 +23,10 @@ class WeeklyHotTopicJob
   end
 
   def ranges
-    @ranges ||= weekly_ranges
+    @ranges ||= weekly_ranges(week_age)
+  end
+
+  def week_age
+    @week_age ||= (Time.now - 6.days).beginning_of_day
   end
 end
