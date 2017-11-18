@@ -8,6 +8,10 @@ describe Topic, type: :model do
     expect(build(:topic, node_id: nil).valid?).not_to be_truthy
   end
 
+  it 'should respond to topic_views' do
+    expect(topic.topic_views).to be_truthy
+  end
+
   it 'should set last_active_mark on created' do
     # because the Topic index is sort by replied_at,
     # so the new Topic need to set a Time, that it will display in index page
