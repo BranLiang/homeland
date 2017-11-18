@@ -9,17 +9,13 @@ class ScoreCalculator
 
   def calculate
     ranges.each_with_index.inject(0) do |sum, (range, i)|
-      sum + range_score(range_score, ranges_length - i, @reply_weight)
+      sum + range_score(range, i + 1, @reply_weight)
     end
   end
 
   private
 
   attr_reader :topic, :ranges
-
-  def ranges_length
-    @ranges_count ||= ranges.length
-  end
 
   def range_score(range, time_weight, reply_weight)
     (views_count_between(range[0], range[1]) + replies_count_between(range[0], range[1]) * reply_weight) * time_weight
