@@ -60,6 +60,10 @@ class TopicsController < ApplicationController
     end
   end
 
+  def hot
+    render action: "index"
+  end
+
   # GET /topics/favorites
   def favorites
     @topics = current_user.favorite_topics.includes(:user)
