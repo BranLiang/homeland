@@ -8,6 +8,11 @@
   - [notifications, 100]
   - [http_request, 50]
   - [search_indexer, 30]
+  - [medium, 10]
   - [mailer, 5]
   - [mailers, 5]
   - [default, 3]
+:schedule:
+  weekly_hot_topic_job:
+    every: '1h'
+    queue: medium
