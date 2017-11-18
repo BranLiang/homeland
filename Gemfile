@@ -143,6 +143,6 @@ group :development, :test do
   gem 'capybara'
   gem 'letter_opener'
   gem 'yard'
-
+  gem 'pry-byebug'
   gem 'codecov', require: false
 end

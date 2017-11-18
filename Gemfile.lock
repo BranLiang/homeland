@@ -62,6 +62,7 @@ GEM
     bundler-audit (0.6.0)
       bundler (~> 1.2)
       thor (~> 0.18)
+    byebug (9.1.0)
     cancancan (2.0.0)
     capybara (2.15.1)
       addressable
@@ -268,6 +269,12 @@ GEM
       actionmailer (>= 3.0.0)
       postmark (~> 1.10.0)
     powerpack (0.1.1)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.5.0)
+      byebug (~> 9.1)
+      pry (~> 0.10)
     public_suffix (3.0.0)
     puma (3.10.0)
     rack (2.0.3)
@@ -481,6 +488,7 @@ DEPENDENCIES
   pghero
   postmark
   postmark-rails
+  pry-byebug
   puma
   rack-attack
   rack-cors
@@ -514,4 +522,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
