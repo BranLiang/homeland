@@ -14,5 +14,5 @@
   - [default, 3]
 :schedule:
   weekly_hot_topic_job:
-    every: '1h'
-    queue: medium
+    every: 1h
+    class: WeeklyHotTopicJob
