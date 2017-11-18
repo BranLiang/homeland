@@ -60,7 +60,15 @@ class TopicsController < ApplicationController
     end
   end
 
-  def hot
+  def weekly_hot
+    @topics = Topic.weekly_hot.includes(:user)
+    @topics = @topics.page(params[:page])
+    render action: "index"
+  end
+
+  def daily_hot
+    @topics = Topic.daily_hot.includes(:user)
+    @topics = @topics.page(params[:page])
     render action: "index"
   end
 

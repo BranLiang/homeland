@@ -71,7 +71,8 @@ Rails.application.routes.draw do
     collection do
       get :no_reply
       get :popular
-      get :hot
+      get :weekly_hot
+      get :daily_hot
       get :excellent
       get :favorites
       get :feed, defaults: { format: 'xml' }
