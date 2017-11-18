@@ -91,6 +91,7 @@ gem 'auto-space'
 
 # 队列
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 
 # 分享功能
 gem 'social-share-button'
@@ -143,6 +144,6 @@ group :development, :test do
   gem 'capybara'
   gem 'letter_opener'
   gem 'yard'
-
+  gem 'pry-byebug'
   gem 'codecov', require: false
 end

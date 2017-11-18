@@ -27,6 +27,7 @@ class Topic < ApplicationRecord
   belongs_to :last_reply_user, class_name: "User"
   belongs_to :last_reply, class_name: "Reply"
   has_many :replies, dependent: :destroy
+  has_many :topic_views, dependent: :destroy
 
   validates :user_id, :title, :body, :node_id, presence: true
 
@@ -45,6 +46,8 @@ class Topic < ApplicationRecord
   scope :popular,            -> { where("likes_count > 5") }
   scope :excellent,          -> { where("excellent >= 1") }
   scope :without_hide_nodes, -> { exclude_column_ids("node_id", Topic.topic_index_hide_node_ids) }
+  scope :weekly_hot,         -> { where("weekly_score > 0").order(weekly_score: :desc).limit(100) }
+  scope :daily_hot,          -> { where("daily_score > 0").order(daily_score: :desc).limit(100) }
 
   scope :without_node_ids,   ->(ids) { exclude_column_ids("node_id", ids) }
   scope :without_users,      ->(ids) { exclude_column_ids("user_id", ids) }

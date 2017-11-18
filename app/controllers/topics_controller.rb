@@ -60,6 +60,18 @@ class TopicsController < ApplicationController
     end
   end
 
+  def weekly_hot
+    @topics = Topic.weekly_hot.includes(:user)
+    @topics = @topics.page(params[:page])
+    render action: "index"
+  end
+
+  def daily_hot
+    @topics = Topic.daily_hot.includes(:user)
+    @topics = @topics.page(params[:page])
+    render action: "index"
+  end
+
   # GET /topics/favorites
   def favorites
     @topics = current_user.favorite_topics.includes(:user)
@@ -86,6 +98,7 @@ class TopicsController < ApplicationController
     @topic = Topic.unscoped.includes(:user).find(params[:id])
     render_404 if @topic.deleted?
 
+    @topic.topic_views.create
     @topic.hits.incr(1)
     @node = @topic.node
     @show_raw = params[:raw] == "1"
