@@ -61,14 +61,26 @@ class TopicsController < ApplicationController
   end
 
   def weekly_hot
-    @topics = Topic.weekly_hot.includes(:user)
-    @topics = @topics.page(params[:page])
+    cache_topics = $redis.get("weekly_hot_topics")
+    if cache_topics
+      @topics = Marshal.load(cache_topics)
+    else
+      @topics = Topic.weekly_hot.includes(:user).to_a
+      $redis.setex("weekly_hot_topics", 3600, Marshal.dump(@topics))
+    end
+    @topics = Kaminari.paginate_array(@topics).page(params[:page])
     render action: "index"
   end
 
   def daily_hot
-    @topics = Topic.daily_hot.includes(:user)
-    @topics = @topics.page(params[:page])
+    cache_topics = $redis.get("daily_hot_topics")
+    if cache_topics
+      @topics = Marshal.load(cache_topics)
+    else
+      @topics = Topic.daily_hot.includes(:user).to_a
+      $redis.setex("daily_hot_topics", 600, Marshal.dump(@topics))
+    end
+    @topics = Kaminari.paginate_array(@topics).page(params[:page])
     render action: "index"
   end
 
